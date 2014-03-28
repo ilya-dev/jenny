@@ -1,0 +1,9 @@
+suites:
+    jenny_suite:
+        namespace: Jenny
+        src_path: src
+        spec_path: .
+        spec_prefix: spec
+
+formatter.name: pretty
+

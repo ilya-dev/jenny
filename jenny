@@ -1,0 +1,28 @@
+#!/usr/bin/env php
+<?php
+
+// the Composer autoloader
+require __DIR__.'/vendor/autoload.php';
+
+// -1 means "all"
+error_reporting(-1);
+
+// might possibly be switched off
+ini_set('display_errors', true);
+
+// allow to run endlessly
+set_time_limit(0);
+
+// ideally, this should be placed within your php.ini
+date_default_timezone_set('UTC');
+
+// init the console application
+$app = new Symfony\Component\Console\Application('Jenny', '0.1');
+
+// register commands
+$app->add(new Jenny\Commands\REPL);
+$app->add(new Jenny\Commands\Run);
+
+// exit with the returned status code
+exit($app->run());
+
