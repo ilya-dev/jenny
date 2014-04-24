@@ -9,30 +9,30 @@ use Jenny\Jenny;
 class REPL extends Command {
 
     /**
-     * The instance of Jenny
+     * The Jenny instance.
      *
      * @var \Jenny\Jenny
      */
     protected $jenny;
 
     /**
-     * The Output instance
+     * The OutputInterface implementation.
      *
      * @var \Symfony\Component\Console\Output\OutputInterface
      */
     protected $output;
 
     /**
-     * The DialogHelper instance
+     * The DialogHelper instance.
      *
      * @var \Symfony\Component\Console\Helper\DialogHelper
      */
     protected $dialog;
 
     /**
-     * The constructor
+     * The constructor.
      *
-     * @param  \Jenny\Jenny $jenny
+     * @param \Jenny\Jenny $jenny
      * @return REPL
      */
     public function __construct(Jenny $jenny = null)
@@ -43,7 +43,7 @@ class REPL extends Command {
     }
 
     /**
-     * Configure the command
+     * Configure the command.
      *
      * @return void
      */
@@ -55,10 +55,10 @@ class REPL extends Command {
     }
 
     /**
-     * Execute the command
+     * Execute the command.
      *
-     * @param  \Symfony\Component\Console\Input\InputInterface   $input
-     * @param  \Symfony\Component\Console\Output\OutputInterface $output
+     * @param \Symfony\Component\Console\Input\InputInterface $input
+     * @param \Symfony\Component\Console\Output\OutputInterface $output
      * @return void
      */
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -66,14 +66,14 @@ class REPL extends Command {
         $this->output = $output;
         $this->dialog = $this->getHelperSet()->get('dialog');
 
-        while(($command = $this->askForCommand()) !== 'quit')
+        while (($command = $this->askForCommand()) !== 'quit')
         {
             $output->writeln('<info># => '.$this->jenny->run($command).'</info>');
         }
     }
 
     /**
-     * Ask the user for a command
+     * Ask the user for a command.
      *
      * @var string
      */

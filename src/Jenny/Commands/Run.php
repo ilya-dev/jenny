@@ -11,16 +11,16 @@ use Jenny\Jenny;
 class Run extends Command {
 
     /**
-     * The Jenny instance
+     * The Jenny instance.
      *
      * @var \Jenny\Jenny
      */
     protected $jenny;
 
     /**
-     * The constructor
+     * The constructor.
      *
-     * @param  \Jenny\Jenny|null $jenny
+     * @param \Jenny\Jenny|null $jenny
      * @return Run
      */
     public function __construct(Jenny $jenny = null)
@@ -31,7 +31,7 @@ class Run extends Command {
     }
 
     /**
-     * Configure the command
+     * Configure the command.
      *
      * @return void
      */
@@ -47,10 +47,10 @@ class Run extends Command {
     }
 
     /**
-     * Execute the command
+     * Execute the command.
      *
-     * @param  \Symfony\Component\Console\Input\InputInterface   $input
-     * @param  \Symfony\Component\Console\Output\OutputInterface $output
+     * @param \Symfony\Component\Console\Input\InputInterface $input
+     * @param \Symfony\Component\Console\Output\OutputInterface $output
      * @return void
      */
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -66,23 +66,23 @@ class Run extends Command {
     }
 
     /**
-     * Read the given file into an array
+     * Read the given file into an array.
      *
-     * @param  string $path
+     * @param string $path
      * @return array
      */
     protected function readFile($path)
     {
         $path = __DIR__.'/../../../'.$path;
 
-        if ( ! is_readable($path))
+        if ( ! \is_readable($path))
         {
             throw new \RuntimeException(
                 "The file ($path) is not readable or does not exist"
             );
         }
 
-        return file($path);
+        return \file($path);
     }
 
 }
