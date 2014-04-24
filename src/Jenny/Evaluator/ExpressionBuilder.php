@@ -15,7 +15,7 @@ class ExpressionBuilder {
      * The constructor
      *
      * @param  \Jenny\Evaluator\Container $container
-     * @return void
+     * @return ExpressionBuilder
      */
     public function __construct(Container $container)
     {

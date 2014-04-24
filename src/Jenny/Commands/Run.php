@@ -21,7 +21,7 @@ class Run extends Command {
      * The constructor
      *
      * @param  \Jenny\Jenny|null $jenny
-     * @return void
+     * @return Run
      */
     public function __construct(Jenny $jenny = null)
     {

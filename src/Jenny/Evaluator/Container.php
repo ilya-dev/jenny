@@ -12,7 +12,7 @@ class Container {
     /**
      * The constructor
      *
-     * @return void
+     * @return Container
      */
     public function __construct()
     {

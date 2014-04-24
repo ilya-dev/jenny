@@ -23,7 +23,7 @@ class Evaluator {
      *
      * @param \Jenny\Evaluator\Container              $container
      * @param \Jenny\Evaluator\ExpressionBuilder|null $builder
-     * @return void
+     * @return Evaluator
      */
     public function __construct(Container $container,
         ExpressionBuilder $builder = null)

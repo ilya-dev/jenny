@@ -28,7 +28,7 @@ class Tokenizer {
      *
      * @param  \Jenny\Lexer\Reader   $reader
      * @param  \Jenny\Lexer\Analyzer $analyzer
-     * @return void
+     * @return Tokenizer
      */
     public function __construct(Reader $reader, Analyzer $analyzer)
     {

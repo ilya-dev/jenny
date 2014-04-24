@@ -42,7 +42,7 @@ class Token {
      *
      * @param  mixed  $value
      * @param  string $type
-     * @return void
+     * @return Token
      */
     public function __construct($value, $type)
     {

@@ -33,7 +33,7 @@ class REPL extends Command {
      * The constructor
      *
      * @param  \Jenny\Jenny $jenny
-     * @return void
+     * @return REPL
      */
     public function __construct(Jenny $jenny = null)
     {

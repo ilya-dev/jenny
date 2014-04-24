@@ -29,7 +29,7 @@ class Jenny {
      *
      * @param  \Jenny\Lexer\Tokenizer|null     $tokenizer
      * @param  \Jenny\Evaluator\Evaluator|null $evaluator
-     * @return void
+     * @return Jenny
      */
     public function __construct(Tokenizer $tokenizer = null,
         Evaluator $evaluator = null)
