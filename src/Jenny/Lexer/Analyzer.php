@@ -3,9 +3,9 @@
 class Analyzer {
 
     /**
-     * Determine whether the given character is a white space or not
+     * Determine whether the character is a white space.
      *
-     * @param  string  $character
+     * @param string $character
      * @return boolean
      */
     public function isWhiteSpace($character)
@@ -14,9 +14,9 @@ class Analyzer {
     }
 
     /**
-     * Determine whether the given character is a number or not
+     * Determine whether the character is a number.
      *
-     * @param  string  $character
+     * @param string $character
      * @return boolean
      */
     public function isNumber($character)
@@ -25,9 +25,9 @@ class Analyzer {
     }
 
     /**
-     * Determine whether the given character is an operator or not
+     * Determine whether the character is an operator.
      *
-     * @param  string  $character
+     * @param string $character
      * @return boolean
      */
     public function isOperator($character)
@@ -36,9 +36,9 @@ class Analyzer {
     }
 
     /**
-     * Determine whether the given character is an indentifier or not
+     * Determine whether the character is an indentifier.
      *
-     * @param  string  $character
+     * @param string $character
      * @return boolean
      */
     public function isIndentifier($character)
@@ -47,15 +47,15 @@ class Analyzer {
     }
 
     /**
-     * Determine whether the given regex matches the given string
+     * Determine whether the regex matches the given string.
      *
-     * @param  string  $string
-     * @param  string  $regex
+     * @param string $string
+     * @param string $regex
      * @return boolean
      */
     protected function match($string, $regex)
     {
-        return (boolean)preg_match($regex, $string);
+        return (boolean) \preg_match($regex, $string);
     }
 
 }
