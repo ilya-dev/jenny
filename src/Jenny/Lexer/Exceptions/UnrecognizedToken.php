@@ -1,8 +1,4 @@
 <?php namespace Jenny\Lexer\Exceptions;
 
-class UnrecognizedToken extends \Exception {
-
-
-
-}
+class UnrecognizedToken extends \Exception {}
 

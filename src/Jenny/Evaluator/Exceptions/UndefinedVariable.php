@@ -1,8 +1,4 @@
 <?php namespace Jenny\Evaluator\Exceptions;
 
-class UndefinedVariable extends \Exception {
-
-
-
-}
+class UndefinedVariable extends \Exception {}
 
