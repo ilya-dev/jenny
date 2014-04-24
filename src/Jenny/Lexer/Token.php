@@ -3,56 +3,55 @@
 class Token {
 
     /**
-     * Represents a number
+     * A number representation.
      *
      * @var string
      */
     const NUMBER = 'number';
 
     /**
-     * Represents an indentifier
+     * An indentifier representation.
      *
      * @var string
      */
     const INDENTIFIER = 'indentifier';
 
     /**
-     * Represents an operator
+     * An operator representation.
      *
      * @var string
      */
     const OPERATOR = 'operator';
 
     /**
-     * The value of token
+     * The value of token.
      *
      * @var mixed
      */
     protected $value;
 
     /**
-     * The type of token
+     * The type of token.
      *
      * @var string
      */
     protected $type;
 
     /**
-     * The constructor
+     * The constructor.
      *
-     * @param  mixed  $value
-     * @param  string $type
+     * @param mixed $value
+     * @param string $type
      * @return Token
      */
     public function __construct($value, $type)
     {
         $this->value = $value;
-
         $this->type  = $type;
     }
 
     /**
-     * Get the token value
+     * Get the token value.
      *
      * @return mixed
      */
@@ -62,7 +61,7 @@ class Token {
     }
 
     /**
-     * Get the token type
+     * Get the token type.
      *
      * @return string
      */
@@ -72,16 +71,14 @@ class Token {
     }
 
     /**
-     * Compare the given type with the token type
+     * Compare the given type with the token type.
      *
-     * @param  string  $type
+     * @param string $type
      * @return boolean
      */
     public function is($type)
     {
-        // I intentionally used $this->getType() instead of $this->type
-        // to prevent a possible accidental assignment
-        return $this->getType() === $type;
+        return $this->getType() == $type;
     }
 
 }
