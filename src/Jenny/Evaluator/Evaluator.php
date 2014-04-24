@@ -5,40 +5,38 @@ use Jenny\Lexer\Token;
 class Evaluator {
 
     /**
-     * The Container instance
+     * The Container instance.
      *
-     * @var \Jenny\Evaluator\Container
+     * @var Container
      */
     protected $container;
 
     /**
-     * The ExpressionBuilder instance
+     * The ExpressionBuilder instance.
      *
-     * @var \Jenny\Evaluator\ExpressionBuilder
+     * @var ExpressionBuilder
      */
     protected $builder;
 
     /**
-     * The constructor
+     * The constructor.
      *
-     * @param \Jenny\Evaluator\Container              $container
-     * @param \Jenny\Evaluator\ExpressionBuilder|null $builder
+     * @param Container $container
+     * @param ExpressionBuilder|null $builder
      * @return Evaluator
      */
-    public function __construct(Container $container,
-        ExpressionBuilder $builder = null)
+    public function __construct(Container $container, ExpressionBuilder $builder = null)
     {
         $this->container = $container;
 
-        // nice trick, still testable but makes it easier to create an instance
         $this->builder = $builder ?: new ExpressionBuilder($container);
     }
 
     /**
-     * Evaluate the given array of tokens
+     * Evaluate the given array of tokens.
      *
-     * @param  array        $tokens
-     * @return mixed|null
+     * @param array $tokens
+     * @return mixed
      */
     public function evaluateLine(array $tokens)
     {
@@ -51,28 +49,23 @@ class Evaluator {
     }
 
     /**
-     * Make the expression compatible with the PHP syntax
-     * So it can passed to eval()
+     * Make the expression compatible with the PHP syntax so it can be eval()'ed.
      *
-     * @param  string $code
+     * @param string $code
      * @return string
      */
     public function makeCompatible($code)
     {
         // 2^2 => pow(2,2)
-        $code = preg_replace(
-            '/(-?[0-9\.]+)\^(-?[0-9]+)/', // could be simpler
-            'pow($1,$2)',
-            $code
-        );
+        $code = \preg_replace('/(-?[0-9\.]+)\^(-?[0-9]+)/', 'pow($1,$2)', $code);
 
         return $code;
     }
 
     /**
-     * Determine whether the given array of tokens contains an assignment
+     * Determine whether the given array of tokens contains an assignment.
      *
-     * @param  array   $tokens
+     * @param array $tokens
      * @return boolean
      */
     protected function containsAssignment(array $tokens)
@@ -80,17 +73,20 @@ class Evaluator {
         // foo = 23 + 10
         //     ^
 
-        if ( ! isset($tokens[1])) return false;
+        if ( ! isset($tokens[1]))
+        {
+            return false;
+        }
 
         $token = $tokens[1];
 
-        return $token->is(Token::OPERATOR) and $token->getValue() == '=';
+        return $token->is(Token::OPERATOR) and ($token->getValue() == '=');
     }
 
     /**
-     * Create a new key in the container and calculate its value
+     * Create a new key in the container and calculate its value.
      *
-     * @param  array  $tokens
+     * @param array $tokens
      * @return string
      */
     protected function handleAssignment(array $tokens)
@@ -100,17 +96,17 @@ class Evaluator {
 
         $key = $tokens[0]->getValue();
 
-        $value = $this->buildAndEvaluate(array_slice($tokens, 2));
+        $value = $this->buildAndEvaluate(\array_slice($tokens, 2));
 
         $this->container->set($key, $value);
 
-        return "[$key] equals to $value";
+        return "[{$key}] equals to {$value}";
     }
 
     /**
-     * Build an expression from the given array of tokens and evaluate it
+     * Build an expression from the given array of tokens and evaluate it.
      *
-     * @param  array $tokens
+     * @param array $tokens
      * @return mixed
      */
     protected function buildAndEvaluate(array $tokens)
@@ -121,16 +117,16 @@ class Evaluator {
     }
 
     /**
-     * Evaluate the given code using built-in eval() function
+     * Evaluate the given code using the built-in eval() function.
      *
-     * @param  string $code
+     * @param string $code
      * @return mixed
      */
     protected function evaluate($code)
     {
         $code = $this->makeCompatible($code);
 
-        return eval("return $code;");
+        return eval("return {$code};");
     }
 
 }
