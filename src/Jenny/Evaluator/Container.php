@@ -3,14 +3,14 @@
 class Container {
 
     /**
-     * The array of variables
+     * The array of variables.
      *
      * @var array
      */
     protected $variables = [];
 
     /**
-     * The constructor
+     * The constructor.
      *
      * @return Container
      */
@@ -20,28 +20,31 @@ class Container {
     }
 
     /**
-     * Get the value associated with the given key
+     * Get the value associated with the given key.
      *
-     * @param  string $key
+     * @param string $key
      * @return mixed
      */
     public function get($key)
     {
-        if ( ! array_key_exists($key, $this->variables)) return null;
+        if ( ! \array_key_exists($key, $this->variables))
+        {
+            return null;
+        }
 
         return $this->variables[$key];
     }
 
     /**
-     * Add a key => value pair
+     * Add a key => value pair.
      *
-     * @param  string $key
-     * @param  mixed  $value
+     * @param string $key
+     * @param mixed $value
      * @return void
      */
     public function set($key, $value)
     {
-        $this->variables[strval($key)] = $value;
+        $this->variables[\strval($key)] = $value;
     }
 
 }
