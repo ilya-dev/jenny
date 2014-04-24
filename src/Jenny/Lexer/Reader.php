@@ -3,32 +3,32 @@
 class Reader {
 
     /**
-     * The input string
+     * The input string.
      *
      * @var string
      */
     protected $input = '';
 
     /**
-     * The array of characters
+     * The array of characters.
      *
      * @var array
      */
     protected $characters = [];
 
     /**
-     * Sets the input string
+     * Set the input string.
      *
-     * @param  string $input
+     * @param string $input
      * @return void
      */
     public function setInput($input)
     {
-        if ( ! is_string($input))
+        if ( ! \is_string($input))
         {
-            $type = gettype($input);
+            $message = 'Expected a string, but got '.\gettype($input);
 
-            throw new \InvalidArgumentException("Expected string but got $type");
+            throw new \InvalidArgumentException($message);
         }
 
         $this->input = $input;
@@ -37,7 +37,7 @@ class Reader {
     }
 
     /**
-     * Returns the input string
+     * Get the input string.
      *
      * @return string
      */
@@ -47,15 +47,15 @@ class Reader {
     }
 
     /**
-     * Advance the cursor and return the corresponding character
+     * Advance the cursor and return the corresponding character.
      *
      * @return string
      */
     public function advance()
     {
-        $character = array_shift($this->characters);
+        $character = \array_shift($this->characters);
 
-        if ( ! is_string($character))
+        if ( ! \is_string($character))
         {
             throw new Exceptions\EndOfLine;
         }
@@ -64,23 +64,23 @@ class Reader {
     }
 
     /**
-     * Determine if the end of the input string was reached
+     * Determine if the end of the input string was reached.
      *
      * @return boolean
      */
     public function isEnd()
     {
-        return count($this->characters) === 0;
+        return \count($this->characters) == 0;
     }
 
     /**
-     * Reset the array of characters
+     * Reset the characters array.
      *
      * @return void
      */
     protected function reset()
     {
-        $this->characters = str_split($this->input);
+        $this->characters = \str_split($this->input);
     }
 
 }
