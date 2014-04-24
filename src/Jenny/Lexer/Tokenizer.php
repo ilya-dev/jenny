@@ -3,31 +3,31 @@
 class Tokenizer {
 
     /**
-     * The Reader instance
+     * The Reader instance.
      *
-     * @var \Jenny\Lexer\Reader
+     * @var Reader
      */
     protected $reader;
 
     /**
-     * The Analyzer instance
+     * The Analyzer instance.
      *
-     * @var \Jenny\Lexer\Analyzer
+     * @var Analyzer
      */
     protected $analyzer;
 
     /**
-     * The array of tokens
+     * The array of tokens.
      *
      * @var array
      */
     protected $tokens = [];
 
     /**
-     * The constructor
+     * The constructor.
      *
-     * @param  \Jenny\Lexer\Reader   $reader
-     * @param  \Jenny\Lexer\Analyzer $analyzer
+     * @param Reader $reader
+     * @param Analyzer $analyzer
      * @return Tokenizer
      */
     public function __construct(Reader $reader, Analyzer $analyzer)
@@ -37,9 +37,9 @@ class Tokenizer {
     }
 
     /**
-     * Transform the given string to an array of tokens
+     * Transform the given string to an array of tokens.
      *
-     * @param  string $string
+     * @param string $string
      * @return array
      */
     public function tokenize($string)
@@ -57,7 +57,7 @@ class Tokenizer {
     }
 
     /**
-     * Reset the array of tokens
+     * Reset the array of tokens.
      *
      * @return void
      */
@@ -67,9 +67,9 @@ class Tokenizer {
     }
 
     /**
-     * Extract exactly one token from the input string
+     * Extract exactly one token from the input string.
      *
-     * @param  string|null $character
+     * @param string|null $character
      * @return void
      */
     protected function extractToken($character = null)
@@ -79,41 +79,39 @@ class Tokenizer {
 
         if ($analyzer->isWhiteSpace($character))
         {
-            // all white spaces are ignored completely
-
-            return;
+            return null;
         }
 
         if ($analyzer->isOperator($character))
         {
             $this->addOperator($character);
 
-            return;
+            return null;
         }
 
         if ($analyzer->isIndentifier($character))
         {
             $this->extractIndentifier($character);
 
-            return;
+            return null;
         }
 
         if ($analyzer->isNumber($character))
         {
             $this->extractNumber($character);
 
-            return;
+            return null;
         }
 
-        throw new Exceptions\UnrecognizedToken(
-            "No corresponding token for $character"
-        );
+        $message = 'No corresponding token for '.$character;
+
+        throw new Exceptions\UnrecognizedToken($message);
     }
 
     /**
-     * Extract a number from the input string
+     * Extract a number from the input string.
      *
-     * @param  string $number
+     * @param string $number
      * @return string
      */
     protected function extractNumber($number)
@@ -132,7 +130,7 @@ class Tokenizer {
         {
             $this->addNumber($number);
 
-            return;
+            return null;
         }
 
         $this->addNumber($number);
@@ -141,9 +139,9 @@ class Tokenizer {
     }
 
     /**
-     * Extract an indentifier from the input string
+     * Extract an indentifier from the input string.
      *
-     * @param  string $indentifier
+     * @param string $indentifier
      * @return string
      */
     protected function extractIndentifier($indentifier)
@@ -162,7 +160,7 @@ class Tokenizer {
         {
             $this->addIndentifier($indentifier);
 
-            return;
+            return null;
         }
 
         $this->addIndentifier($indentifier);
@@ -171,9 +169,9 @@ class Tokenizer {
     }
 
     /**
-     * Add a token of type "indentifier"
+     * Add a token of type "indentifier".
      *
-     * @param  string $indentifier
+     * @param string $indentifier
      * @return void
      */
     protected function addIndentifier($indentifier)
@@ -182,9 +180,9 @@ class Tokenizer {
     }
 
     /**
-     * Add a token of type "number"
+     * Add a token of type "number".
      *
-     * @param  string $number
+     * @param string $number
      * @return void
      */
     protected function addNumber($number)
@@ -193,9 +191,9 @@ class Tokenizer {
     }
 
     /**
-     * Add a token of type "operator"
+     * Add a token of type "operator".
      *
-     * @param  string $operator
+     * @param string $operator
      * @return void
      */
     protected function addOperator($operator)
@@ -204,10 +202,10 @@ class Tokenizer {
     }
 
     /**
-     * Add a new token to the tokens array
+     * Add a new token to the tokens array.
      *
-     * @param  mixed  $value
-     * @param  string $type
+     * @param mixed $value
+     * @param string $type
      * @return void
      */
     protected function addToken($value, $type)
