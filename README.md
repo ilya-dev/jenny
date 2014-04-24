@@ -1,5 +1,7 @@
 **Jenny** is a very simple interpreter for **AEL** (short for *arithmetic expression language*), which was created mostly for educational purposes.
 
+![](http://i.imgur.com/fYUPYF0.png)
+
 # Syntax
 
 > Attention, please: at this very moment, **functions** are not supported. 
