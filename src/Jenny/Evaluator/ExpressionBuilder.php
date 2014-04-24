@@ -5,16 +5,16 @@ use Jenny\Lexer\Token;
 class ExpressionBuilder {
 
     /**
-     * The Container instance
+     * The Container instance.
      *
-     * @var \Jenny\Evaluator\Container
+     * @var Container
      */
     protected $container;
 
     /**
-     * The constructor
+     * The constructor.
      *
-     * @param  \Jenny\Evaluator\Container $container
+     * @param Container $container
      * @return ExpressionBuilder
      */
     public function __construct(Container $container)
@@ -23,9 +23,9 @@ class ExpressionBuilder {
     }
 
     /**
-     * Transform the given array of tokens to a string
+     * Transform the given array of tokens to a string.
      *
-     * @param  array  $tokens
+     * @param array $tokens
      * @return string
      */
     public function build(array $tokens)
@@ -41,9 +41,9 @@ class ExpressionBuilder {
     }
 
     /**
-     * Transform the given token to a string
+     * Transform the given token to a string.
      *
-     * @param  \Jenny\Lexer\Token $token
+     * @param \Jenny\Lexer\Token $token
      * @return string
      */
     protected function transform(Token $token)
@@ -52,7 +52,7 @@ class ExpressionBuilder {
         {
             $value = $this->container->get($token->getValue());
 
-            if (is_null($value))
+            if (\is_null($value))
             {
                 throw new Exceptions\UndefinedVariable($token->getValue());
             }
@@ -62,7 +62,7 @@ class ExpressionBuilder {
             $value = $token->getValue();
         }
 
-        return strval($value);
+        return \strval($value);
     }
 
 }
